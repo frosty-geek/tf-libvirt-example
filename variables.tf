@@ -1,0 +1,17 @@
+variable "libvirt_user" { default = "root" }
+variable "libvirt_server" { default = "172.20.10.19" }
+variable "vm_id" { default = "vm1007" }
+variable "hostname" { default = "test01" }
+variable "domain" { default = "h.ctrl-c.de" }
+variable "network" { default = ["br10"] }
+variable "ip4" { default = "172.20.10.66/24" }
+variable "gw4" { default = "172.20.10.1" }
+variable "ram" { default = 2 * 1024 }
+variable "cpu" { default = 1 }
+variable "dist" { default = "focal" }
+variable "vol_size" { default = 20 * 1024 * 1024 * 1024 }
+variable "swap_size" { default = "1G" }
+variable "autostart" { default = false }
+variable "data_enable" { default = false }
+variable "data" { default = 20 * 1024 * 1024 * 1024 }
+variable "image_url" { default = "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img" }
