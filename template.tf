@@ -1,17 +1,33 @@
-data "template_file" "user_data" {
-  template = file("${path.module}/../user-data.yml")
+data "template_file" "userdata" {
+  template = file("${path.module}/userdata.yaml")
   vars = {
-    hostname = var.hostname
-    fqdn     = "${var.hostname}.${var.domain}"
-    chroot   = var.vm_id
-    swap     = var.swap_size
+    hostname       = var.hostname
+    domainname     = var.domainname
+    username       = var.username
+    ssh_public_key = file(var.ssh_public_key)
   }
 }
 
-data "template_file" "network_config" {
-  template = file("${path.module}/../network_config.yml")
-  vars = {
-    ip4 = var.ip4
-    gw4 = var.gw4
-  }
-}
+#data template_file "metadata" {
+#  template = file("${path.module}/metadata.yaml")
+#  vars = {
+#    dhcp        = var.dhcp
+#    hostname    = var.hostname_prefix
+#    ip_address  = var.ip_address
+#    netmask     = var.netmask
+#    nameservers = jsonencode(var.nameservers)
+#    gateway     = var.gateway
+#  }
+#}
+
+#data template_file "networkconfig" {
+#  template = file("${path.module}/networkconfig.yaml")
+#  vars = {
+#    dhcp        = var.dhcp
+#    hostname    = var.hostname_prefix
+#    ip_address  = var.ip_address
+#    netmask     = var.netmask
+#    nameservers = jsonencode(var.nameservers)
+#    gateway     = var.gateway
+#  }
+#}

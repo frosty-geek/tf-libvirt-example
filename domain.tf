@@ -1,11 +1,11 @@
-resource "libvirt_domain" "ubuntu-vm" {
-  name      = "${var.vm_id}__${var.hostname}"
-  memory    = var.ram
-  vcpu      = var.cpu
+resource "libvirt_domain" "vm" {
+  name      = var.hostname
+  memory    = var.vram
+  vcpu      = var.vcpu
   autostart = var.autostart
 
   disk {
-    volume_id = libvirt_volume.ubuntu-vol.id
+    volume_id = libvirt_volume.vm-volume-root.id
   }
 
   boot_device {
@@ -13,13 +13,13 @@ resource "libvirt_domain" "ubuntu-vm" {
   }
 
   dynamic "network_interface" {
-    for_each = var.network
+    for_each = var.networks
     content {
       bridge = network_interface.value
     }
   }
 
-  cloudinit = libvirt_cloudinit_disk.cloud-init.id
+  cloudinit = libvirt_cloudinit_disk.cloudinit.id
 
   console {
     target_type = "serial"

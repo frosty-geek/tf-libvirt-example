@@ -1,21 +1,15 @@
-resource "libvirt_volume" "ubuntu-base" {
-  name   = "ubuntu-${var.dist}-${var.hostname}-base.qcow2"
-  pool   = "default"
-  source = "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
-  format = "qcow2"
+resource "libvirt_volume" "vm-volume-root" {
+  name   = "${var.hostname}-${var.image_release}-root.${var.volume_format}"
+  source = replace(var.image_url, "%RELEASE%", var.image_release)
+  pool   = var.volume_pool
+  format = var.volume_format
+  size   = var.volume_size_root
 }
 
-resource "libvirt_volume" "ubuntu-vol" {
-  name           = "${var.vm_id}__${var.hostname}.qcow2"
-  pool           = "vm_images"
-  base_volume_id = libvirt_volume.ubuntu-base.id
-  size           = var.vol_size
-}
-
-resource "libvirt_volume" "data" {
-  count = var.data_enable ? 1 : 0
-
-  name          = "${var.vm_id}__${var.hostname}-data.qcow2"
-  pool          = "vm_images"
-  size          = var.data
+resource "libvirt_volume" "vm-volume-data" {
+  count  = var.volume_data_enabled ? 1 : 0
+  name   = "${var.hostname}-data.${var.volume_format}"
+  pool   = var.volume_pool
+  format = var.volume_format
+  size   = var.volume_size_data
 }

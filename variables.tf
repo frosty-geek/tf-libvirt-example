@@ -1,17 +1,64 @@
-variable "libvirt_user" { default = "root" }
-variable "libvirt_server" { default = "172.20.10.19" }
-variable "vm_id" { default = "vm1007" }
-variable "hostname" { default = "test01" }
-variable "domain" { default = "h.ctrl-c.de" }
-variable "network" { default = ["br10"] }
-variable "ip4" { default = "172.20.10.66/24" }
-variable "gw4" { default = "172.20.10.1" }
-variable "ram" { default = 2 * 1024 }
-variable "cpu" { default = 1 }
-variable "dist" { default = "focal" }
-variable "vol_size" { default = 20 * 1024 * 1024 * 1024 }
-variable "swap_size" { default = "1G" }
-variable "autostart" { default = false }
-variable "data_enable" { default = false }
-variable "data" { default = 20 * 1024 * 1024 * 1024 }
-variable "image_url" { default = "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img" }
+variable "libvirt_uri" {
+  type    = string
+  default = "qemu:///system"
+}
+variable "image_url" {
+  type    = string
+  default = "https://cloud-images.ubuntu.com/%RELEASE%/current/%RELEASE%-server-cloudimg-amd64.img"
+}
+variable "image_release" {
+  type    = string
+  default = "focal"
+}
+variable "hostname" {
+  type    = string
+  default = "server1"
+}
+variable "domainname" {
+  type    = string
+  default = "example.com"
+}
+variable "username" {
+  type    = string
+  default = "ubuntu"
+}
+variable "ssh_public_key" {
+  type    = string
+  default = "~/.ssh/id_rsa.pub"
+}
+variable "networks" {
+  type    = list(string)
+  default = ["virbr0"]
+}
+variable "vram" {
+  type    = number
+  default = 2 * 1024
+}
+variable "vcpu" {
+  type    = number
+  default = 1
+}
+variable "volume_format" {
+  type    = string
+  default = "qcow2"
+}
+variable "volume_pool" {
+  type    = string
+  default = "default"
+}
+variable "volume_size_root" {
+  type    = number
+  default = 10 * 1024 * 1024 * 1024
+}
+variable "volume_data_enabled" {
+  type    = bool
+  default = false
+}
+variable "volume_size_data" {
+  type    = number
+  default = 50 * 1024 * 1024 * 1024
+}
+variable "autostart" {
+  type    = bool
+  default = false
+}

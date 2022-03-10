@@ -1,0 +1,7 @@
+#cloud-config
+hostname: ${hostname}
+fqdn: ${hostname}.${domainname}
+username: ${username}
+ssh_authorized_keys:
+        - ${ssh_public_key}
+manage_etc_hosts: true
