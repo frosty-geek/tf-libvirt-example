@@ -5,3 +5,38 @@ username: ${username}
 ssh_authorized_keys:
         - ${ssh_public_key}
 manage_etc_hosts: true
+
+packages:
+  - vim
+  - tmux
+  - curl
+  - apg
+  - etckeeper
+# unatted-upgrades
+apt:
+  conf: |
+    Unattended-Upgrade {
+      AutoFixInterruptedDpkg "true";
+      MinimalSteps "true";
+      Remove-Unused-Kernel-Packages "true";
+      Remove-New-Unused-Dependencies "true";
+      Automatic-Reboot "true";
+    };
+# Ensure latest package upgrades installed
+package_upgrade: true
+# reboot after installation if required
+packages_reboot_if_required: true
+
+# run commands
+runcmd:
+  - "etckeeper commit -m cloud-init-start"
+
+# clean boot into new system after 1min
+power_state:
+  delay: "+1"
+  mode: reboot
+  message: final reboot in 1min
+  timeout: 30
+  condition: True
+
+final_message: "The cloud-init finished after $UPTIME seconds"
