@@ -3,14 +3,14 @@ resource "libvirt_volume" "vm-volume-base" {
   source = replace(var.image_url, "%RELEASE%", var.image_release)
   pool   = var.volume_pool
   format = var.volume_format
-  size   = var.volume_size_root
 }
 
 resource "libvirt_volume" "vm-volume-root" {
-  name   = "${var.hostname}-root.${var.volume_format}"
-  pool   = var.volume_pool
-  format = var.volume_format
-  size   = var.volume_size_root
+  name           = "${var.hostname}-root.${var.volume_format}"
+  pool           = var.volume_pool
+  format         = var.volume_format
+  size           = var.volume_size_root
+  base_volume_id = libvirt_volume.vm-volume-base.id
 }
 
 resource "libvirt_volume" "vm-volume-data" {
