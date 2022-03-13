@@ -2,16 +2,36 @@
 
 A simple way to spawn ubuntu VMs
 
-
-## minimal variables needed
+## TL;DR just do it
 
 ```bash
-$ cat <EOF > terraform.tfvars 
-servername = "server1"
+$ terraform init
+
+# see minimal variables below
+
+$ terraform plan
+$ terraform apply
+```
+
+
+## variables
+### minimal variables needed to run
+
+```bash
+$ cat < EOF > terraform.tfvars 
+hostname = "server1"
 domainname = "example.com"
 EOF
 ```
 
+
+## terraform workspaces
+
+```bash
+$ terraform workspace new server1.example.com
+$ terraform workspace select server1.example.com
+$ terraform apply -var="hostname=server1" -var="domainname=example.com"
+```
 
 ## Update terraform-docs 
 
