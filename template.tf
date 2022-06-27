@@ -1,5 +1,5 @@
 data "template_file" "userdata" {
-  template = file("${path.module}/userdata.yaml")
+  template = file("${path.module}/userdata")
   vars = {
     hostname       = var.hostname
     domainname     = var.domainname
@@ -9,7 +9,7 @@ data "template_file" "userdata" {
 }
 
 #data template_file "metadata" {
-#  template = file("${path.module}/metadata.yaml")
+#  template = file("${path.module}/metadata")
 #  vars = {
 #    dhcp        = var.dhcp
 #    hostname    = var.hostname_prefix
@@ -21,7 +21,7 @@ data "template_file" "userdata" {
 #}
 
 #data template_file "networkconfig" {
-#  template = file("${path.module}/networkconfig.yaml")
+#  template = file("${path.module}/networkconfig")
 #  vars = {
 #    dhcp        = var.dhcp
 #    hostname    = var.hostname_prefix
