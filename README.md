@@ -18,7 +18,7 @@ $ terraform apply
 ### minimal variables needed to run
 
 ```bash
-$ cat < EOF > terraform.tfvars 
+$ cat < EOF > terraform.tfvars
 hostname = "server1"
 domainname = "example.com"
 EOF
@@ -33,7 +33,7 @@ $ terraform workspace select server1.example.com
 $ terraform apply -var="hostname=server1" -var="domainname=example.com"
 ```
 
-## Update terraform-docs 
+## Update terraform-docs
 
 ```bash
 $ terraform-docs markdown table --output-file README.md --output-mode inject .
