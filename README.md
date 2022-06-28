@@ -2,6 +2,8 @@
 
 A simple way to spawn ubuntu VMs
 
+test
+
 ## TL;DR just do it
 
 ```bash
